@@ -81,5 +81,3 @@ gem "gretel"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
-gem 'bootstrap', '~>4.0.0'
-gem 'mini_racer'
