@@ -354,3 +354,5 @@
 * belongs_to :feeling_detail
 * belongs_to :user_personal
 * belongs_to :item
+
+#### bootstrap 
