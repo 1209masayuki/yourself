@@ -16,21 +16,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
       params[:user][:password] = pass
       params[:user][:password_confirmation] = pass
     end
-    super
+    
     @user = User.new(sign_up_params)
-    unless @user.valid?
-      render :new and return
+    if @user.valid?   
+      session["devise.regist_data"] = {user: @user.attributes}
+      session["devise.regist_data"][:user]["password"] = params[:user][:password]
+      @address = @user.build_address
+      render :new_address and return
+    else
+      new
     end
-   session["devise.regist_data"] = {user: @user.attributes}
-   session["devise.regist_data"][:user]["password"] = params[:user][:password]
-   @address = @user.build_address
-   render :new_address
   end
 
   def create_address
     @user = User.new(session["devise.regist_data"]["user"])
     @address = Address.new(address_params)
-
     if @address.valid?
       @user.build_address(@address.attributes)
       @user.save
