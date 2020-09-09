@@ -5,14 +5,48 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+   def new
+    @user = User.new
+   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    if params[:sns_auth] == 'true'
+      pass = Devise.friendly_token
+      params[:user][:password] = pass
+      params[:user][:password_confirmation] = pass
+    end
+    super
+    @user = User.new(sign_up_params)
+    unless @user.valid?
+      render :new and return
+    end
+   session["devise.regist_data"] = {user: @user.attributes}
+   session["devise.regist_data"][:user]["password"] = params[:user][:password]
+   @address = @user.build_address
+   render :new_address
+  end
+
+  def create_address
+    @user = User.new(session["devise.regist_data"]["user"])
+    @address = Address.new(address_params)
+
+    if @address.valid?
+      @user.build_address(@address.attributes)
+      @user.save
+      session["devise.regist_data"]["user"].clear
+      sign_in(:user, @user)
+      redirect_to root_path
+    else
+      render :new_address
+    end
+  end
+ 
+  protected
+ 
+  def address_params
+    params.require(:address).permit(:postal_code, :prefecture_id, :city, :addresses, :building)
+  end
 
   # GET /resource/edit
   # def edit
