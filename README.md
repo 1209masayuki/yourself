@@ -1,6 +1,6 @@
 # テーブル設計
 
-## user_personals テーブル
+## users テーブル
 
 | Column          | Type       | Options                  |
 | --------------- | ---------- | ------------------------ |
@@ -14,7 +14,7 @@
 
 ### Association
 
-* has_one :user_address
+* has_one :address
 * has_one :card
 * has_many :feeling_details
 * has_many :items
@@ -35,7 +35,7 @@
 * has_many :awes
 * has_many :disapprovals
 
-## user_addresses テーブル
+## addresses テーブル
 
 | Column           | Type         | Options                     |
 | ---------------- | ------------ | --------------------------- |
@@ -44,11 +44,11 @@
 | city             | string       | null: false, default: ""    |
 | addresses        | text         | null: false, default: ""    |
 | building         | string       |              default: ""    |
-| user_personal_id | references   | null: false, optional: true |
+| user             | references   |                             |
 
 ### Association
 
-* belongs_to :user_personal
+* belongs_to :user, optional: true
 * extend ActiveHash::Associations::ActiveRecordExtensions
 * belongs_to_active_hash :prefecture_id
 
@@ -58,11 +58,11 @@
 | ---------------------- | ---------- | ------------------------------ |
 | card_token             | string     | null: false, default: ""       |
 | customer_token         | string     | null: false, default: ""       |
-| user_personal_id       | references | null: false, foreign_kye: true |
+| user                   | references | null: false, foreign_kye: true |
 
 ### Association
 
-* belongs_to :user_personal
+* belongs_to :user
 
 ## items テーブル
 
@@ -73,7 +73,7 @@
 
 ### Association
 
-* belongs_to :user_personal
+* belongs_to :user
 * has_one    :item_order
 * has_one    :remorse
 * has_one    :contempt
@@ -88,8 +88,8 @@
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| item_id          | references | null: false, foreign_kye: true |
-| user_personal_id | references | null: false, foreign_kye: true |
+| item             | references | null: false, foreign_kye: true |
+| user             | references | null: false, foreign_kye: true |
 
 ### Association
 
@@ -106,12 +106,12 @@
 | where_detail     | string     |              default: ""       |
 | why              | text       | null: false, default: ""       |
 | how              | text       | null: false, default: ""       |
-| user_personal_id | references | null: false, foreign_kye: true |
-| feeling_show_id  | references | null: false, foreign_kye: true |
+| user             | references | null: false, foreign_kye: true |
+| feeling_show     | references | null: false, foreign_kye: true |
 
 ### Association
 
-* belongs_to :user_personal
+* belongs_to :user
 * has_one    :feeling_show
 * extend ActiveHash::Associations::ActiveRecordExtensions
 * belongs_to_active_hash :feeling_id
@@ -151,208 +151,208 @@
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false, foreign_kye: true |
+| user              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false, foreign_kye: true |
 
 ### Association
 
 * belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :user
 
 ## trusts テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false, foreign_kye: true |
+| user              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false, foreign_kye: true |
 
 ### Association
 
 * belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :user
 
 ## fears テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false, foreign_kye: true |
+| user              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false, foreign_kye: true |
 
 ### Association
 
 * belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :user
 
 ## surprises テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false, foreign_kye: true |
+| user              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false, foreign_kye: true |
 
 ### Association
 
 * belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :user
 
 ## sadnesses テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false, foreign_kye: true |
+| user              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false, foreign_kye: true |
 
 ### Association
 
 * belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :user
 
 ## disgusts テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false, foreign_kye: true |
+| user              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false, foreign_kye: true |
 
 ### Association
 
 * belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :user
 
 ## angers テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false, foreign_kye: true |
+| user              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false, foreign_kye: true |
 
 ### Association
 
 * belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :user
 
 ## anticipations テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false, foreign_kye: true |
+| user              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false, foreign_kye: true |
 
 ### Association
 
 * belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :user
 
 ## remorses テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| item_id           | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false,    optional: true |
+| user              | references | null: false, foreign_kye: true |
+| item              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false                    |
 
 ### Association
 
-* belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :feeling_detail, optional: true
+* belongs_to :user
 * belongs_to :item
 
 ## contempts テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| item_id           | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false,    optional: true |
+| user              | references | null: false, foreign_kye: true |
+| item              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false                    |
 
 ### Association
 
-* belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :feeling_detail, optional: true
+* belongs_to :user
 * belongs_to :item
 
 ## aggressivenesses テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| item_id           | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false,    optional: true |
+| user              | references | null: false, foreign_kye: true |
+| item              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false                    |
 
 ### Association
 
-* belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :feeling_detail, optional: true
+* belongs_to :user
 * belongs_to :item
 
 ## optimisms テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| item_id           | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false,    optional: true |
+| user              | references | null: false, foreign_kye: true |
+| item              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false                    |
 
 ### Association
 
-* belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :feeling_detail, optional: true
+* belongs_to :user
 * belongs_to :item
 
 ## loves テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| item_id           | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false,    optional: true |
+| user              | references | null: false, foreign_kye: true |
+| item              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false                    |
 
 ### Association
 
-* belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :feeling_detail, optional: true
+* belongs_to :user
 * belongs_to :item
 
 ## submissions テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| item_id           | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false,    optional: true |
+| user              | references | null: false, foreign_kye: true |
+| item              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false                    |
 
 ### Association
 
-* belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :feeling_detail, optional: true
+* belongs_to :user
 * belongs_to :item
 
 ## awes テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| item_id           | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false,    optional: true |
+| user              | references | null: false, foreign_kye: true |
+| item              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false                    |
 
 ### Association
 
-* belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :feeling_detail, optional: true
+* belongs_to :user
 * belongs_to :item
 
 ## disapprovals テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_personal_id  | references | null: false, foreign_kye: true |
-| item_id           | references | null: false, foreign_kye: true |
-| feeling_detail_id | references | null: false,    optional: true |
+| user              | references | null: false, foreign_kye: true |
+| item              | references | null: false, foreign_kye: true |
+| feeling_detail    | references | null: false                    |
 
 ### Association
 
-* belongs_to :feeling_detail
-* belongs_to :user_personal
+* belongs_to :feeling_detail, optional: true
+* belongs_to :user
 * belongs_to :item
 
 #### bootstrap 
