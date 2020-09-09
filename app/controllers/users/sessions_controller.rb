@@ -4,14 +4,22 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    @user = User.new
+    super
+  end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    @user = User.new(params[:id])
+    if @user.valid?
+      @user.save
+      redirect_to root_path
+    else
+      render 'new'
+    end
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy
