@@ -1,5 +1,39 @@
-<h1>マイページ</h1>
+<h1><%= @user.family_name %></h1>
 <% if user_signed_in?%>
-  <h2>ログインしています</h2>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+  <% unless current_user.card.present? %>
+    <div>
+      <%= link_to "クレジットカードを登録", new_card_path %>
+    </div>
+  <% else %>
+    <div class="Card__title">
+      <h3>カード情報<h3>
+    </div>
+    <div class="Card_info">
+      【カード番号】
+      <br>
+      <%= "**** **** **** " + @card[:last4] %>
+      <%# カード番号の下4桁を取得 %>
+      <br>
+      【有効期限】
+      <br>
+      <%= @card[:exp_month] %>
+      <%# 有効期限の「月」を取得 %>
+      /
+      <%= @card[:exp_year] %>
+      <%# 有効期限の「年」を取得 %>
+    </div>
+    <div>
+      <%= link_to "感情を増やす", items_path %>
+    </div>
+    <% if current_user.item_orders %>
+     <% @itemorders.each do |itemorder| %>
+      <div>
+        <%= itemorder.item.name if itemorder.user_id == current_user.id %>
+      </div>
+      <% end %>
+    <% end%>
+  <% end %>
+    <div>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>  
+    </div>
 <% end %>

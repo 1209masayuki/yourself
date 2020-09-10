@@ -18,6 +18,7 @@
 * has_one :card
 * has_many :feeling_details
 * has_many :items
+* has_many :item_orders
 * has_many :joys
 * has_many :trusts
 * has_many :fears
@@ -94,6 +95,7 @@
 ### Association
 
 * belongs_to :item
+* belongs_to :user
 
 ## feeling_details テーブル
 

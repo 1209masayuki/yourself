@@ -1,0 +1,15 @@
+<div class="content">
+  <% @items.each do |item| %> 
+<%# eachメソッドを使うことで、全商品に対して以下の処理を実行します %>
+    <p>商品名：<%= item.name %></p>
+    <p>値段：<%= item.price %>円</p>
+    <%# もしitem_orderテーブルに保存されていたら %>
+   <% if item.item_order && item.item_order.user_id == current_user.id %> 
+      <div class='sold-out'>
+        <b>Sold Out!!</b>
+      </div>
+   <% else %> 
+     <%= link_to '購入する', order_item_path(item.id), method: :post %>
+   <% end %>
+  <% end %>
+</div>
