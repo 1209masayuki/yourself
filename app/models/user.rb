@@ -6,6 +6,9 @@ class User < ApplicationRecord
   validates :first_name, :family_name, :birthday, :age, :phone_num, presence: true
   has_one :address      
   has_many :sns_credentials   
+  has_one :card, dependent: :destroy
+  has_many :items
+  has_many :item_orders
 
   def self.from_omniauth(auth)
     sns = SnsCredential.where(provider: auth.provider, uid: auth.uid).first_or_create
