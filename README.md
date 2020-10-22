@@ -1,360 +1,170 @@
-# テーブル設計
-
-## users テーブル
-
-| Column          | Type       | Options                  |
-| --------------- | ---------- | ------------------------ |
-| first_name      | string     | null: false              |
-| family_name     | string     | null: false              |
-| birthday        | date       | null: false, default: "" |
-| age             | integer    | null: false, default: "" |
-| phone_num       | string     | null: false, default: "" |
-| email           | string     | null: false              |
-| password        | string     | null: false              |
-
-### Association
-
-* has_one :address
-* has_one :card
-* has_many :feeling_details
-* has_many :items
-* has_many :item_orders
-* has_many :joys
-* has_many :trusts
-* has_many :fears
-* has_many :surprises
-* has_many :sadnesses
-* has_many :disgusts
-* has_many :angers
-* has_many :anticipations
-* has_many :remorses
-* has_many :contempts
-* has_many :aggressivenesses
-* has_many :optimisms
-* has_many :loves
-* has_many :submissions
-* has_many :awes
-* has_many :disapprovals
-
-## addresses テーブル
-
-| Column           | Type         | Options                     |
-| ---------------- | ------------ | --------------------------- |
-| postal_code      | string       | null: false, default: ""    |
-| prefecture_id    | integer      | null: false,                |
-| city             | string       | null: false, default: ""    |
-| addresses        | text         | null: false, default: ""    |
-| building         | string       |              default: ""    |
-| user             | references   |                             |
-
-### Association
-
-* belongs_to :user, optional: true
-* extend ActiveHash::Associations::ActiveRecordExtensions
-* belongs_to_active_hash :prefecture_id
-
-## cards テーブル
-
-| Column                 | Type       | Options                        |
-| ---------------------- | ---------- | ------------------------------ |
-| card_token             | string     | null: false, default: ""       |
-| customer_token         | string     | null: false, default: ""       |
-| user                   | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :user
-
-## items テーブル
-
-| Column           | Type       | Options                        |
-| ---------------- | ---------- | ------------------------------ |
-| name             | string     | null: false                    |
-| price            | integer    | null: false, index: true       |
-
-### Association
-
-* belongs_to :user
-* has_one    :item_order
-* has_one    :remorse
-* has_one    :contempt
-* has_one    :aggressiveness
-* has_one    :optimism
-* has_one    :love
-* has_one    :submission
-* has_one    :awe
-* has_one    :disapproval
-
-## item_orders テーブル
-
-| Column           | Type       | Options                        |
-| ---------------- | ---------- | ------------------------------ |
-| item             | references | null: false, foreign_kye: true |
-| user             | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :item
-* belongs_to :user
-
-## feeling_details テーブル
-
-| Column           | Type       | Options                        |
-| ---------------- | ---------- | ------------------------------ |
-| feeling_id       | integer    | null: false                    |
-| what_detail      | string     | null: false, default: ""       |
-| when_detail      | string     |              default: ""       |
-| where_id         | integer    | null: false,                   |
-| where_detail     | string     |              default: ""       |
-| why              | text       | null: false, default: ""       |
-| how              | text       | null: false, default: ""       |
-| user             | references | null: false, foreign_kye: true |
-| feeling_show     | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :user
-* has_one    :feeling_show
-* extend ActiveHash::Associations::ActiveRecordExtensions
-* belongs_to_active_hash :feeling_id
-* belongs_to_active_hash :where_id
-* has_many :joys
-* has_many :trusts
-* has_many :fears
-* has_many :surprises
-* has_many :sadnesses
-* has_many :disgusts
-* has_many :angers
-* has_many :anticipations
-* has_many :remorses
-* has_many :contempts
-* has_many :aggressivenesses
-* has_many :optimisms
-* has_many :loves
-* has_many :submissions
-* has_many :awes
-* has_many :disapprovals
-
-## feeling_shows テーブル
-
-| Column   | Type    | Options                  |
-| -------- | ------- | ------------------------ |
-| what_id  | integer | null: false              |
-| when     | date    | null: false, default: "" |
-
-### Association
-
-* belongs_to :feeling_detail
-* extend ActiveHash::Associations::ActiveRecordExtensions
-* belongs_to_active_hash :what_id
-* has_one_attached :image
-
-## joys テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :feeling_detail
-* belongs_to :user
-
-## trusts テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :feeling_detail
-* belongs_to :user
-
-## fears テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :feeling_detail
-* belongs_to :user
-
-## surprises テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :feeling_detail
-* belongs_to :user
-
-## sadnesses テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :feeling_detail
-* belongs_to :user
-
-## disgusts テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :feeling_detail
-* belongs_to :user
-
-## angers テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :feeling_detail
-* belongs_to :user
-
-## anticipations テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false, foreign_kye: true |
-
-### Association
-
-* belongs_to :feeling_detail
-* belongs_to :user
-
-## remorses テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| item              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false                    |
-
-### Association
-
-* belongs_to :feeling_detail, optional: true
-* belongs_to :user
-* belongs_to :item
-
-## contempts テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| item              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false                    |
-
-### Association
-
-* belongs_to :feeling_detail, optional: true
-* belongs_to :user
-* belongs_to :item
-
-## aggressivenesses テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| item              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false                    |
-
-### Association
-
-* belongs_to :feeling_detail, optional: true
-* belongs_to :user
-* belongs_to :item
-
-## optimisms テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| item              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false                    |
-
-### Association
-
-* belongs_to :feeling_detail, optional: true
-* belongs_to :user
-* belongs_to :item
-
-## loves テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| item              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false                    |
-
-### Association
-
-* belongs_to :feeling_detail, optional: true
-* belongs_to :user
-* belongs_to :item
-
-## submissions テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| item              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false                    |
-
-### Association
-
-* belongs_to :feeling_detail, optional: true
-* belongs_to :user
-* belongs_to :item
-
-## awes テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| item              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false                    |
-
-### Association
-
-* belongs_to :feeling_detail, optional: true
-* belongs_to :user
-* belongs_to :item
-
-## disapprovals テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user              | references | null: false, foreign_kye: true |
-| item              | references | null: false, foreign_kye: true |
-| feeling_detail    | references | null: false                    |
-
-### Association
-
-* belongs_to :feeling_detail, optional: true
-* belongs_to :user
-* belongs_to :item
-
-#### bootstrap 
+# アプリ名: **Yourself**  
+<br>
+
+## **What**  
+---
+このアプリの利用者が自身のことを、客観的に且つ正確に分析できるようになるアプリを開発した。  
+例えば、人生が困難に直面しているときはこのアプリを使用して自分を再認識し、適格な判断をすることが可能だ。  
+早い段階からこのアプリを使用し続け、残りの人生を満喫してもらいたい。  
+<br>
+
+**記録する**  
+私たちは物心がついてから、絶えず様々なことを経験し感情を抱いてきた。  
+書き方のルールは定めていないので、その経験や感情をただただ記録してもらいたい。  
+自身の人格形成に強く影響を及ぼしただろう体験とその感情は、特に記録をおすすめする。  
+このアプリは７つの基本感情（喜び、信頼、恐れ、驚き、悲しみ、嫌悪、怒り、期待）を記録することができる。  
+そしてその感情を抱くに至った背景も記録してもらう。  
+感情は購入して増やすことが可能（楽観、愛、服従、畏怖、拒絶、後悔、軽蔑、攻撃）  
+<br>
+
+**知る**  
+見返すことを習慣にしよう。その際に、記録が少ないと効果を発揮しないので注意。  
+今までの感情の記録を条件を絞って検索することが可能なので、自己精査にうまく役立ててもらいたい。  
+成長するにつれて、何に心を動かされ、どのくらい心に響いたかは変わっていくものだと思う。  
+是非、今すぐに始めて、自分が何者であるかの問いに少しも悩むことがないような未来を掴んでもらいたい。  
+<br>
+
+## **Why**  
+---
+このアプリの実現は、私のあったらよかったなぁという思いから設計・開発に至った。  
+記録の力を多くの人に理解してもらい、このアプリが生活の一部になることを期待している。  
+<br>
+私は、自分自身について言語化することが得意でない。また言語化することに違和感を感じている。  
+面接を受けたことがある人は、思い出してほしい。  
+大抵の人は、自分の長所を述べ、それに基づく経験を切り取ってくる。  
+ただ、その長所は本当に自分の強みと言えるものなのだろうか。どんな困難も本当に克服してきたのだろうか。  
+私に当てはめて考えてみると、その答えはいいえである。  
+ここ数年、人間性が重視され始め、面接にウエイトを置いている企業や学校は多くなってきている。  
+それにも関わらず、人間性の判断基準は分かりにくく、結局、面接官との相性という運的要素は大きい。  
+一生懸命、企業が求めてる人物像に合わせにいっている人は多いのでなはいだろうか。  
+<br>
+<br>
+残念だが、このアプリは直接的に上記の問題を解決するには至らない。  
+ただし、皆が直面するであろうこの違和感から起こりうる問題を防ぐことが可能だ。  
+自己精査が不十分のまま行き着いた先は、おそらくあなたが満足に活躍ができる場所にはなっていないだろう。  
+このアプリを通じ、過去の自分を客観的かつ正確に知ることで、これからの自分の行動や発言に自信がつくだろう。  
+また次の目的に繋がるきっかけにもなりうるだろう。  
+どんな場面でも、自分を偽って取り繕うことよりも、真を追求し、自信を持って行動してほしい。  
+それは自分の手に入れたい道を掴むのに大いに役に立つだろう。  
+
+<br>
+
+## **機能一覧**
+---
+* [X] pay.jpによる購入
+* [X] クレジットカードの登録
+* [X] deviseによるアカウントの登録
+* [X] SNSから情報を取得しアカウントの登録
+* [X] ウィザード形式によるアカウントの登録
+* [X] 画面遷移
+* [ ] バリデーションの日本語表示
+* [ ] テストコード
+* [ ] パンくず機能
+* [ ] AWSによる画像保存
+* [ ] AWSのよる自動デプロイ
+* [ ] 画像投稿する際のプレビュー機能
+* [ ] 画像を複数枚同時に投稿
+* [ ] タグ付け
+* [ ] 複雑な検索
+* [ ] ビューストラップを使ったコーティング
+
+<br>
+
+## **DEMO画像**
+---
+* ### ログイン画面  
+  <img src="スクリーンショット 0002-10-20 19.32.38.png">  
+
+<br>
+
+* ### 新規登録画面1  
+  <img src="スクリーンショット 0002-10-20 19.57.33.png">  
+
+<br>
+
+* ### 新規登録画面2  
+  <img src="スクリーンショット 0002-10-20 20.07.47.png">  
+
+<br>
+
+* ### トップ画面  
+  <img src="スクリーンショット 0002-10-20 20.02.00.png">  
+
+<br>
+
+* ### クレジットカード登録画面  
+  <img src="スクリーンショット 0002-10-20 20.02.52.png">  
+
+<br>
+
+* ### 購入画面  
+  <img src="スクリーンショット 0002-10-20 20.03.51.png">  
+
+<br>
+<br>
+<br>
+
+## **使用技術(開発環境)**
+---
+* ### 言語  
+  ruby2.6.5  
+  <br>
+* ### フレームワーク  
+  Ruby on Rails6.0.0  
+  <br>
+* ### フロント  
+  HTML/CSS/API  
+  <br>
+* ### DB  
+  Mysql2>=0.4.4  
+  <br>
+* ### テスト[^1]  
+  RSpec/factory_bot  
+  <br>
+* ### インフラ[^1]  
+  AWS EC2 Linux2AMI t3small  
+  <br>
+* ### ドメイン・DNS[^1]  
+  お名前ドットコム/AWS Route53  
+  <br>
+* ### 本番環境[^1]  
+  Webサーバ/AWS/Capistrano 自動デプロイ  
+  <br>
+* ### 使用gem  
+  rspec-rails/factory_bot_rails/faker/gimei/capistrano  
+  capistrano-rbenv/capistrano-bundler/capistrano-rails/capistrano3-unicorn  
+  rubocop/rails_12factor/unicorn/mini_magick/image_processing  
+  pry-rails//devise//active_hash/payjp/aws-sdk-s3/rails-i18n/  
+  ransack/gretel/omniauth-facebook/omniauth-google-oauth2  
+  omniauth-rails_csrf_protection  
+
+<br>
+
+## **課題や今後実装したい機能**  
+---
+要件定義した残りの機能(機能一覧参照)  
+リマインダー機能(通知機能)  
+AIによるおすすめ機能(スポーツ、学問、趣味、本、映画)  
+
+<br>
+
+## **開発日数**  
+---
+約20日間
+
+<br>
+
+## **設計**  
+---
+* ### 画面遷移図  
+  <img src="スクリーンショット 0002-10-20 21.18.40.png">  
+
+<br>
+
+* ### ER図  
+  <img src="スクリーンショット 0002-10-20 21.19.47.png">  
+
+<br>
+
+---
+[^1]: 未実装
