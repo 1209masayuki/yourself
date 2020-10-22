@@ -4,7 +4,7 @@
     <p>商品名：<%= item.name %></p>
     <p>値段：<%= item.price %>円</p>
     <%# もしitem_orderテーブルに保存されていたら %>
-   <% if item.item_order && item.item_order.user_id == current_user.id %> 
+   <% if item.item_order && (item.item_order.user_id == current_user.id) %> 
       <div class='sold-out'>
         <b>Sold Out!!</b>
       </div>
