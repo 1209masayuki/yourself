@@ -1,5 +1,29 @@
 <h1><%= @user.family_name %></h1>
 <% if user_signed_in?%>
+  <div>
+      <a href= "#">喜び　0</a>
+    </div>
+    <div>
+      <a href= "#">信頼　0</a>
+    </div>
+    <div>
+      <a href= "#">恐れ　0</a>
+    </div>
+    <div>
+      <a href= "#">驚き　0</a>
+    </div>
+    <div>
+      <a href= "#">悲しみ　0</a>
+    </div>
+    <div>
+      <a href= "#">嫌悪　0</a>
+    </div>
+    <div>
+      <a href= "#">怒り　0</a>
+    </div>
+    <div>
+      <a href= "#">期待　0</a>
+    </div>
   <% unless current_user.card.present? %>
     <div>
       <%= link_to "クレジットカードを登録", new_card_path %>
@@ -22,17 +46,20 @@
       <%= @card[:exp_year] %>
       <%# 有効期限の「年」を取得 %>
     </div>
-    <div>
-      <%= link_to "感情を増やす", items_path %>
-    </div>
     <% if current_user.item_orders %>
      <% @itemorders.each do |itemorder| %>
       <div>
-        <%= itemorder.item.name if itemorder.user_id == current_user.id %>
+        <a href ="#"><%= itemorder.item.name if itemorder.user_id == current_user.id %></a>
       </div>
       <% end %>
     <% end%>
+    <div>
+      <%= link_to "感情を増やす", items_path %>
+    </div>
   <% end %>
+    <div>
+      <%= link_to "感情を記録する", "#" %>
+    </div>
     <div>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>  
     </div>
