@@ -102,8 +102,6 @@
   <img src="スクリーンショット 0002-10-20 20.03.51.png">  
 
 <br>
-<br>
-<br>
 
 ## **使用技術(開発環境)**
 ---
@@ -115,13 +113,13 @@
   HTML/CSS/API  
 * ### DB  
   Mysql2>=0.4.4  
-* ### テスト[^1]  
+* ### テスト(予定)  
   RSpec/factory_bot  
-* ### インフラ[^1]  
+* ### インフラ(予定)  
   AWS EC2 Linux2AMI t3small  
-* ### ドメイン・DNS[^1]  
+* ### ドメイン・DNS(予定)  
   お名前ドットコム/AWS Route53  
-* ### 本番環境[^1]  
+* ### 本番環境(予定)  
   Webサーバ/AWS/Capistrano 自動デプロイ  
 * ### 使用gem  
   rspec-rails/factory_bot_rails/faker/gimei/capistrano  
@@ -158,6 +156,3 @@ AIによるおすすめ機能(スポーツ、学問、趣味、本、映画)
   <img src="スクリーンショット 0002-10-20 21.19.47.png">  
 
 <br>
-
----
-[^1]: 未実装
