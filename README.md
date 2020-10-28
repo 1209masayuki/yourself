@@ -51,6 +51,7 @@
 
 ## **機能一覧**
 ---
+※チェックがついていないものは未実装
 * [X] pay.jpによる購入
 * [X] クレジットカードの登録
 * [X] deviseによるアカウントの登録
@@ -108,28 +109,20 @@
 ---
 * ### 言語  
   ruby2.6.5  
-  <br>
 * ### フレームワーク  
   Ruby on Rails6.0.0  
-  <br>
 * ### フロント  
   HTML/CSS/API  
-  <br>
 * ### DB  
   Mysql2>=0.4.4  
-  <br>
 * ### テスト[^1]  
   RSpec/factory_bot  
-  <br>
 * ### インフラ[^1]  
   AWS EC2 Linux2AMI t3small  
-  <br>
 * ### ドメイン・DNS[^1]  
   お名前ドットコム/AWS Route53  
-  <br>
 * ### 本番環境[^1]  
   Webサーバ/AWS/Capistrano 自動デプロイ  
-  <br>
 * ### 使用gem  
   rspec-rails/factory_bot_rails/faker/gimei/capistrano  
   capistrano-rbenv/capistrano-bundler/capistrano-rails/capistrano3-unicorn  
